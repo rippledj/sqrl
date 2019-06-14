@@ -29,7 +29,7 @@ use Trianglman\Sqrl\Traits\SqrlUrlGenerator;
 /**
  * Generates a SQRL QR image, URL and nonce.
  */
-class SqrlGenerate implements SqrlGenerateInterface
+class SqrlGenerate
 {
     use SqrlUrlGenerator {
         generateQry as protected traitGenerateQry;
@@ -51,7 +51,7 @@ class SqrlGenerate implements SqrlGenerateInterface
      */
     protected $configuration = null;
 
-    public function __construct(SqrlConfiguration $config,  SqrlStoreInterface $storage)
+    public function __construct(SqrlConfiguration $config,  SqrlStoreStateless $storage)
     {
         $this->configuration = $config;
         $this->store = $storage;
@@ -72,7 +72,7 @@ class SqrlGenerate implements SqrlGenerateInterface
             $this->nonce = 'failnut';
         }
         if (empty($this->nonce)) {
-            if ($this->store instanceof SqrlStoreStatelessAbstract) {
+            if ($this->store instanceof SqrlStoreStateless) {
                 $this->nonce = $this->store->generateNut($action, $key, $previousNonce);
                 return $this->nonce;
             }
@@ -99,7 +99,8 @@ class SqrlGenerate implements SqrlGenerateInterface
         return $this->generateUrl($this->configuration, $this->getNonce());
     }
 
-    public function render(?string $outputFile)
+    // NOTE: original line commented out
+    public function render(?string $outputFile = null)
     {
         $qrCode = new QrCode();
         $qrCode->setText($this->getUrl());

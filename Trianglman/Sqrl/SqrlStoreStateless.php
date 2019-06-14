@@ -26,14 +26,14 @@
 namespace Trianglman\Sqrl;
 
 /**
- * An abstract class to help users create and read stateless nuts
+ * An class to help users create and read stateless nuts
  *
  * Rather than storing the values important to the nut in stateful storage,
  * the values will be encrypted into the nut.
  *
  * @author johnj
  */
-abstract class SqrlStoreStatelessAbstract implements SqrlStoreInterface 
+class SqrlStoreStateless
 {
     /**
      * The password for the nonce encryption
@@ -182,21 +182,27 @@ abstract class SqrlStoreStatelessAbstract implements SqrlStoreInterface
      *
      * @return array
      */
-    protected abstract function getSessionInfo($sessionId);
+    protected function getSessionInfo($sessionId){
+      //echo "sessionId<br>";
+    }
 
     /**
      * Gets the user's current session ID
      *
      * @return string
      */
-    protected abstract function getCurrentSessionId();
+    protected function getCurrentSessionId(){
+      //echo "getCurrentSessionId";
+    }
 
     /**
      * Gets the user's IP address
      *
      * @return string
      */
-    protected abstract function getIp();
+    protected function getIp(){
+      //echo "getIp";
+    }
 
     /**
      * Sets or updates a value in the user session
@@ -207,7 +213,9 @@ abstract class SqrlStoreStatelessAbstract implements SqrlStoreInterface
      *
      * @return void
      */
-    protected abstract function setSessionValue($sessionId,$key,$value);
+    protected function setSessionValue($sessionId,$key,$value){
+      //echo "setSessionValue";
+    }
 
     /**
      * Base 64 URL encodes a string

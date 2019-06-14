@@ -15,6 +15,8 @@ $generator->render("qrcode.png");
 //get the nonce for other uses, i.e. link, etc.
 $nonce = $generator->getNonce();
 
-///print $nonce;
+echo "Nonce: ".$nonce."</br></br>";
 
 ?>
+
+<img src="qrcode.png">

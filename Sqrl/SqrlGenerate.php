@@ -77,7 +77,7 @@ class SqrlGenerate
      */
      protected function generateNut()
      {
-         $this->nonce = hash_hmac('sha256', uniqid('', true), $this->config->getNonceSalt());
+         $this->nonce = substr(md5(uniqid('', true)), 0, 12);
          return $this->nonce;
      }
 
@@ -100,7 +100,7 @@ class SqrlGenerate
             $url .= '&x='.$path_extension;
         }
         //attach the server friendly name
-        $url .= '&sfn='.$this->base64UrlEncode($this->config->getFriendlyName());
+        //$url .= '&sfn='.$this->base64UrlEncode($this->config->getFriendlyName());
 
         return $url;
     }

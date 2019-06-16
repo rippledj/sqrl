@@ -34,7 +34,7 @@ $nonce = $generator->getNut();
 </head>
 <body>
   <center>
-  <?php echo $url; ?>
+  <?php echo $url; ?></br>
   <div id="sqrl_login_div" class="tooltip">
     <a href="<?php echo $url; ?>">
       <img id="sqrl_login_logo" src="images/login_button.svg">

@@ -10,7 +10,7 @@
 // able to write error, print a message to front end to check permissions of file.
 
 // require_once logging config files;
-require_once "config/logging_config.php";
+require_once SQRL_PHP_DIRPATH."config/logging_config.php";
 
 // Set error reporting according to config values; display `On` for sandbox mode
 // otherwise display errors `Off`

@@ -48,6 +48,9 @@ class SqrlDatabase
           $this->db_status = true;
       }else{
 
+        //load database config constants
+        require_once SQRL_PHP_DIRPATH.'config/db_config.php';
+
         try{
             $this->db_connection = new PDO(DB_APPLICATION.':host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD);
             $this->db_status = true;

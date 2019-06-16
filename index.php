@@ -17,9 +17,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once SQRL_PHP_DIRPATH."include_login_classes.php";
 
 //create config object
-$config = new \Sqrl\SqrlConfiguration('config/config.json');
-//load database config constants
-require_once 'config/db_config.php';
+$config = new \Sqrl\SqrlConfiguration(SQRL_PHP_DIRPATH.'config/config.json');
 //create database object
 $database = new \Sqrl\SqrlDatabase();
 //create SQRL generator object
@@ -36,6 +34,7 @@ $nonce = $generator->getNut();
 </head>
 <body>
   <center>
+  <?php echo $url; ?>
   <div id="sqrl_login_div" class="tooltip">
     <a href="<?php echo $url; ?>">
       <img id="sqrl_login_logo" src="images/login_button.svg">

@@ -89,12 +89,15 @@ class SqrlGenerate
      */
     protected function generateUrl(string $nut): string
     {
+        //build first character of url depending on secure or not
+        if($this->config->getSecure() > 0 || $_SERVER['HTTPS']) $url = 'sqrl://';
+        else $url = 'qrl://';
         //build the base Sqrl url
-        $url = 'sqrl://'.$this->config->getDomain().$this->config->getAuthenticationPath().'?nut='.$nut;
+        $url .= $this->config->getDomain().$this->config->getAuthenticationPath().'?nut='.$nut;
         //calculate the extention onto the base domain (x value)
         if (strpos($this->config->getDomain(), '/') !== false) {
-            $extension = strlen($this->config->getDomain())-strpos($this->config->getDomain(), '/');
-            $url .= '&x='.$extension;
+            $path_extension = strlen($this->config->getDomain())-strpos($this->config->getDomain(), '/');
+            $url .= '&x='.$path_extension;
         }
         //attach the server friendly name
         $url .= '&sfn='.$this->base64UrlEncode($this->config->getFriendlyName());

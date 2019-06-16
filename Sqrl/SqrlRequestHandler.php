@@ -170,26 +170,10 @@ class SqrlRequestHandler
     const BAD_ID_ASSOCIATION = 0x100;
 
     /**
-     * @var SqrlValidateInterface
-     */
-    protected $validator = null;
-
-    /**
-     * @var SqrlGenerateInterface
-     */
-    protected $sqrlGenerator = null;
-
-    /**
      *
      * @var SqrlConfiguration
      */
     protected $config = null;
-
-    /**
-     *
-     * @var SqrlStoreInterface
-     */
-    protected $store = null;
 
     protected $ipMatch = false;
     protected $actions = array();
@@ -203,15 +187,13 @@ class SqrlRequestHandler
     protected $previousIdKey = '';
 
     public function __construct(
-        SqrlConfiguration $config,
-        SqrlValidateInterface $val,
-        SqrlStoreDatabase $store = null,
-        SqrlGenerateInterface $gen = null
-    ) {
+      SqrlConfiguration $config,
+      SqrlDatabase $database,
+      SqrlValidate $validator
+    ){
         $this->config = $config;
-        $this->validator = $val;
-        $this->sqrlGenerator = $gen;
-        $this->store = $store;
+        $this->database = $database;
+        $this->validate = $validator;
     }
 
     /**

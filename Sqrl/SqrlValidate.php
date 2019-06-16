@@ -24,8 +24,6 @@ declare(strict_types=1);
  */
 namespace Sqrl;
 
-use Sqrl\Traits\SqrlUrlGenerator;
-
 /**
  * Validates a nonce/public key pair
  *
@@ -35,11 +33,10 @@ use Sqrl\Traits\SqrlUrlGenerator;
  */
 class SqrlValidate
 {
-    use SqrlUrlGenerator;
     /**
-     * @var SqrlStoreSession
+     * @var SqrlDatabase
      */
-    protected $store = null;
+    protected $database = null;
 
     /**
      *
@@ -50,14 +47,14 @@ class SqrlValidate
     /**
      *
      * @param \Sqrl\SqrlConfiguration $config
-     * @param \Sqrl\SqrlStoreDatabase $storage
+     * @param \Sqrl\SqrlDatabase $storage
      */
     public function __construct(
         SqrlConfiguration $config,
-        SqrlStoreDatabase $storage
+        SqrlDatabase $database
     ) {
-        $this->configuration = $config;
-        $this->store = $storage;
+        $this->config = $config;
+        $this->database = $database;
     }
 
     /**
@@ -71,13 +68,8 @@ class SqrlValidate
      */
     public function validateSignature(string $orig, string $sig, string $pk): bool
     {
-      //validate the nonce
-
-      //validate the signature
-
-      // validate the public key
-
-
+        $msg_orig = sodium_crypto_sign_open($sig.$orig, $pk);
+        return $msg_orig !== false;
     }
 
     /**
@@ -92,8 +84,8 @@ class SqrlValidate
     public function validateServer($server, string $nut, bool $secure): bool
     {
         if (is_string($server)) {
-            return $server === $this->generateUrl($this->configuration, $nut) &&
-                    $secure === $this->configuration->getSecure();
+            return $server === $this->generateUrl($this->config, $nut) &&
+                    $secure === $this->config->getSecure();
         } else {
             if (!isset($server['ver']) ||
                 !isset($server['nut']) ||
@@ -103,11 +95,11 @@ class SqrlValidate
                 return false;
             }
             $nutInfo = $this->store->getNutDetails($nut);
-            return $server['ver'] === implode(',', $this->configuration->getAcceptedVersions()) &&
+            return $server['ver'] === implode(',', $this->config->getAcceptedVersions()) &&
                     $server['nut'] === $nut &&
                     (!is_array($nutInfo) || hexdec($server['tif']) === $nutInfo['tif']) &&
-                    $server['qry'] === $this->generateQry($this->configuration->getAuthenticationPath(), $nut) &&
-                    $secure === $this->configuration->getSecure();
+                    $server['qry'] === $this->generateQry($this->config->getAuthenticationPath(), $nut) &&
+                    $secure === $this->config->getSecure();
         }
     }
 
@@ -122,7 +114,7 @@ class SqrlValidate
     public function validateNut(string $nut, string $signingKey = null): int
     {
         $nutInfo = $this->store->getNutDetails($nut);
-        $maxAge = '-'.$this->configuration->getNonceMaxAge().' minutes';
+        $maxAge = '-'.$this->config->getNonceMaxAge().' minutes';
         if (!is_array($nutInfo)) {
             return self::INVALID_NUT;
         } elseif ($nutInfo['createdDate']->format('U') < strtotime($maxAge)) {
@@ -137,18 +129,5 @@ class SqrlValidate
         }
     }
 
-    /**
-     * Validates the message signature
-     *
-     * @param string $orig
-     * @param string $key
-     * @param string $sig
-     *
-     * @return boolean
-     */
-    public function validateSignature(string $orig, string $key, string $sig): bool
-    {
-        return $this->validator->validateSignature($orig, $sig, $key);
-    }
 
 }

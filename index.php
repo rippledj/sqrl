@@ -13,11 +13,20 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
+/* Sandbox Mode */
+if($_SERVER["SERVER_ADDR"] == $_SERVER["REMOTE_ADDR"]){
+  $config_filepath = 'config/config_localhost.json';
+  require_once SQRL_PHP_DIRPATH.'config/db_config_localhost.php';
+}else{
+  $config_filepath = 'config/config.json';
+  require_once SQRL_PHP_DIRPATH.'config/db_config.php';
+}
+
 //require all classes for generating SQRL login items
 require_once SQRL_PHP_DIRPATH."include_login_classes.php";
 
 //create config object
-$config = new \Sqrl\SqrlConfiguration(SQRL_PHP_DIRPATH.'config/config.json');
+$config = new \Sqrl\SqrlConfiguration(SQRL_PHP_DIRPATH.$config_filepath);
 //create database object
 $database = new \Sqrl\SqrlDatabase();
 //create SQRL generator object

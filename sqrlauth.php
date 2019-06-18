@@ -3,9 +3,7 @@
 //define the path to Sqrl classes
 define("SQRL_PHP_DIRPATH", "Sqrl/");
 
-//load logging controller
-require_once SQRL_PHP_DIRPATH."logging_controller.php";
-
+//require vendor libraries
 require_once "vendor/autoload.php";
 
 /* Sandbox Mode */
@@ -19,13 +17,8 @@ if($_SERVER["SERVER_ADDR"] == $_SERVER["REMOTE_ADDR"]){
 
 //include Exception Class
 require_once SQRL_PHP_DIRPATH."SqrlException.php";
-//include SqrlStoreDatabase
-require_once SQRL_PHP_DIRPATH."SqrlDatabase.php";
 //include SqrlGenerate Class
 require_once SQRL_PHP_DIRPATH."Sqrl.php";
-
-//trigger notice that page was loaded
-trigger_error("SQRL Login Authentication Request - ", E_USER_NOTICE);
 
 //start a session
 if (session_status() == PHP_SESSION_NONE) {
@@ -34,10 +27,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //create SQRL object
 $sqrl = new \Sqrl\Sqrl($config, $database);
-$requestHandler->parseRequest($_GET, $_POST, $_SERVER);
+$sqrl->parseRequest($_GET, $_POST, $_SERVER);
 
 //check validation
-$response = $requestHandler->getResponseMessage();
+$response = $sqrl->getResponseMessage();
 trigger_error("SQRL Login Authentication Request Response - ".$response, E_USER_NOTICE);
 
 ?>

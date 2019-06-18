@@ -1,11 +1,199 @@
-[2019-06-15 21:23:09 UTC] Vanilla Pancakes Exception: Return value of Sqrl\SqrlConfiguration::setFriendlyName() must be an instance of Sqrl\SqrlConfiguration, none returned in /Users/development/Sandbox/sqrl/Sqrl/SqrlConfiguration.php on line 326
-[2019-06-15 21:24:15 UTC] Vanilla Pancakes Notice: : Undefined variable: config in /Users/development/Sandbox/sqrl/Sqrl/SqrlGenerate.php on line 95
-[2019-06-15 21:24:15 UTC] Vanilla Pancakes Exception: Call to a member function getDomain() on null in /Users/development/Sandbox/sqrl/Sqrl/SqrlGenerate.php on line 95
-[2019-06-16 00:43:27 UTC] Vanilla Pancakes Warning: : require_once(/Users/development/Sandbox/sqrl/Sqrl/SodiumNonceValidator.php): failed to open stream: No such file or directory in /Users/development/Sandbox/sqrl/Sqrl/include_login_classes.php on line 8
-[16-Jun-2019 00:43:27 UTC] PHP Fatal error:  require_once(): Failed opening required '/Users/development/Sandbox/sqrl/Sqrl/SodiumNonceValidator.php' (include_path='.:/usr/local/Cellar/php/7.3.6/share/php/pear') in /Users/development/Sandbox/sqrl/Sqrl/include_login_classes.php on line 8
-[2019-06-16 00:43:30 UTC] Vanilla Pancakes Warning: : require_once(Sqrl/SodiumNonceValidator.php): failed to open stream: No such file or directory in /Users/development/Sandbox/sqrl/Sqrl/include_login_classes.php on line 8
-[16-Jun-2019 00:43:30 UTC] PHP Fatal error:  require_once(): Failed opening required 'Sqrl/SodiumNonceValidator.php' (include_path='.:/usr/local/Cellar/php/7.3.6/share/php/pear') in /Users/development/Sandbox/sqrl/Sqrl/include_login_classes.php on line 8
-[2019-06-16 03:41:32 UTC] Vanilla Pancakes Exception: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/development/Sandbox/sqrl/Sqrl/SqrlDatabase.php on line 55
-[2019-06-16 19:58:16 UTC] Vanilla Pancakes Warning: : substr() expects at least 2 parameters, 1 given in /Users/development/Sandbox/sqrl/Sqrl/SqrlGenerate.php on line 80
-[2019-06-16 19:58:16 UTC] Vanilla Pancakes Exception: Argument 1 passed to Sqrl\SqrlGenerate::generateUrl() must be of the type string, null given, called in /Users/development/Sandbox/sqrl/Sqrl/SqrlGenerate.php on line 56 in /Users/development/Sandbox/sqrl/Sqrl/SqrlGenerate.php on line 90
-[2019-06-16 20:21:15 UTC] Vanilla Pancakes Exception: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in /Users/development/Sandbox/sqrl/Sqrl/SqrlDatabase.php on line 55
+[17-Jun-2019 23:24:16 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 36
+[17-Jun-2019 23:28:36 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 36
+[17-Jun-2019 23:29:33 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 36
+[17-Jun-2019 23:39:14 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:39:14 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:39:14 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:333
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(307): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:41:39 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:41:39 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:41:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:333
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(307): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:41:55 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:41:55 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:41:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:333
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(307): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 333
+[17-Jun-2019 23:42:15 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:42:15 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 334
+[17-Jun-2019 23:42:15 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:334
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(308): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 334
+[17-Jun-2019 23:42:22 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:42:22 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:42:22 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:42:31 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:42:31 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:42:31 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:42:39 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:42:39 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:42:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:336
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(310): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:43:04 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:43:04 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(33): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:21 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:43:21 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:21 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:28 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:43:28 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:28 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:33 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:43:33 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:45 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:43:45 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:43:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:44:01 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:44:01 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:44:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:336
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(310): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:44:10 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:44:10 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$database in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:44:10 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:336
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:44:42 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:44:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:44:54 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:44:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[17-Jun-2019 23:45:02 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:45:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:336
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 336
+[17-Jun-2019 23:45:11 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:45:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:45:19 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:45:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:45:29 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:45:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:45:44 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:45:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDO::storeIssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:47:36 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:47:36 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:47:38 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:47:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function storeIssuedNutRecord() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:337
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(309): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(34): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 337
+[17-Jun-2019 23:49:19 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:49:19 UTC] PHP Warning:  imagepng(images/qr_codes/5h01ht6p0a3fc4384r0rjablpt.png): failed to open stream: Permission denied in /Users/development/Sandbox/sqrl/vendor/endroid/qr-code/src/Endroid/QrCode/QrCode.php on line 359
+[17-Jun-2019 23:49:19 UTC] PHP Notice:  Undefined variable: database in /Users/development/Sandbox/sqrl/index.php on line 40
+[17-Jun-2019 23:49:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function clearExpiredNuts() on null in /Users/development/Sandbox/sqrl/index.php:40
+Stack trace:
+#0 {main}
+  thrown in /Users/development/Sandbox/sqrl/index.php on line 40
+[17-Jun-2019 23:50:50 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:50:50 UTC] PHP Warning:  imagepng(images/qr_codes/5h01ht6p0a3fc4384r0rjablpt.png): failed to open stream: Permission denied in /Users/development/Sandbox/sqrl/vendor/endroid/qr-code/src/Endroid/QrCode/QrCode.php on line 359
+[17-Jun-2019 23:50:50 UTC] PHP Notice:  Undefined variable: database in /Users/development/Sandbox/sqrl/index.php on line 40
+[17-Jun-2019 23:50:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function clearExpiredNuts() on null in /Users/development/Sandbox/sqrl/index.php:40
+Stack trace:
+#0 {main}
+  thrown in /Users/development/Sandbox/sqrl/index.php on line 40
+[17-Jun-2019 23:52:41 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:52:50 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:53:29 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:53:30 UTC] PHP Warning:  imagepng(images/5h01ht6p0a3fc4384r0rjablpt.png): failed to open stream: Permission denied in /Users/development/Sandbox/sqrl/vendor/endroid/qr-code/src/Endroid/QrCode/QrCode.php on line 359
+[17-Jun-2019 23:55:31 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:57:05 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32
+[17-Jun-2019 23:57:15 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 32

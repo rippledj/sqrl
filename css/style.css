@@ -6,11 +6,11 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: #555;
+  background-color: #007cc3;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px;
   position: absolute;
   z-index: 1;
   bottom: 125%;
@@ -28,7 +28,7 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #007cc3 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {

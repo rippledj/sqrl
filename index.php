@@ -7,11 +7,9 @@ require_once "vendor/autoload.php";
 
 /* Sandbox Mode */
 if($_SERVER["SERVER_ADDR"] == $_SERVER["REMOTE_ADDR"]){
-  $configFilePath = SQRL_PHP_DIRPATH.'config/config_localhost.json';
-  require_once SQRL_PHP_DIRPATH.'config/db_config_localhost.php';
+  $config = SQRL_PHP_DIRPATH.'config/config_localhost.json';
 }else{
-  $configFilePath = SQRL_PHP_DIRPATH.'config/config.json';
-  require_once SQRL_PHP_DIRPATH.'config/db_config.php';
+  $config = SQRL_PHP_DIRPATH.'config/config.json';
 }
 
 //start a session
@@ -25,14 +23,14 @@ require_once SQRL_PHP_DIRPATH."SqrlException.php";
 require_once SQRL_PHP_DIRPATH."Sqrl.php";
 
 //create SQRL generator object
-$sqrl = new \Sqrl\Sqrl($configFilePath);
+$sqrl = new \Sqrl\Sqrl($config);
 trigger_error("SQRL Login Nut Generation - ", E_USER_NOTICE);
 
 $url = $sqrl->getUrl();
 //get the nonce for other uses, i.e. link, etc.
 $nut = $sqrl->getNut();
 //output the QR file to stdout
-$sqrl->render("images/qr_codes/".$nut.".png");
+//$sqrl->render("images/qr_codes/".$nut.".png");
 //clear expired nuts
 $sqrl->clearExpiredNuts();
 

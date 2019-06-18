@@ -3,7 +3,6 @@
     "secure":1,
     "key_domain":"sqrl.ripplesoftware.ca",
     "authentication_path":"/sqrlauth.php",
-    "friendly_name":"Ripple Software RSRC Test",
     "allow_anonymous_accounts":0,
 
     "db_application":"mysql",
@@ -11,11 +10,13 @@
     "db_name":"sqrl_login",
     "db_username":"db_username",
     "db_password":"db_password",
-    "nonce_table":"sqrl_nonce",
-    "pubkey_table":"sqrl_pubkey",
+    "nonce_table":"sqrl_nuts",
+    "pubkey_table":"sqrl_status",
 
     "nonce_max_age":5,
 
     "height":300,
-    "padding":10
+    "padding":10,
+
+    "error_log":"log/error.log"
 }

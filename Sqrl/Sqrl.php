@@ -297,10 +297,9 @@ class Sqrl
 
     public function __construct(string $config)
     {
-
+        $this->loadConfigFromJSON($config);
         $this->setupLogger();
         $this->databaseConnect();
-        $this->loadConfigFromJSON($config);
 
     }
 
@@ -336,7 +335,7 @@ class Sqrl
           if(!$this->storeIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
             throw new SqrlException(DATABASE_EXCEPTION);
           }else{
-            
+
             return $this->nut;
           }
 
@@ -360,8 +359,6 @@ class Sqrl
             $path_extension = strlen($this->getDomain())-strpos($this->getDomain(), '/');
             $url .= '&x='.$path_extension;
         }
-        //attach the server friendly name
-        //$url .= '&sfn='.$this->base64UrlEncode($this->getFriendlyName());
 
         return $url;
     }
@@ -479,9 +476,6 @@ class Sqrl
         }
         $this->setSecure(!empty($decoded->secure) && (int)$decoded->secure > 0);
         $this->setDomain($decoded->key_domain ?? '');
-        if (!empty($decoded->friendly_name)) {
-            $this->setFriendlyName($decoded->friendly_name);
-        }
         $this->setAuthenticationPath($decoded->authentication_path ?? '');
         $this->setAnonAllowed(
                 !empty($decoded->allow_anonymous_accounts) && (int)$decoded->allow_anonymous_accounts > 0
@@ -495,7 +489,36 @@ class Sqrl
         if (!empty($decoded->padding)) {
             $this->setQrPadding($decoded->padding);
         }
-
+        if (!empty($decoded->db_host)) {
+            $this->db_host = $decoded->db_host;
+        }else{
+          throw new \InvalidArgumentException('Database host not found in configuration file');
+        }
+        if (!empty($decoded->db_application)) {
+            $this->db_application = $decoded->db_application;
+        }else{
+          throw new \InvalidArgumentException('Database name not found in configuration file');
+        }
+        if (!empty($decoded->db_name)) {
+            $this->db_name = $decoded->db_name;
+        }else{
+          throw new \InvalidArgumentException('Database name not found in configuration file');
+        }
+        if (!empty($decoded->db_username)) {
+            $this->db_username = $decoded->db_username;
+        }else{
+          throw new \InvalidArgumentException('Database username not found in configuration file');
+        }
+        if (!empty($decoded->db_password)) {
+            $this->db_password = $decoded->db_password;
+        }else{
+          throw new \InvalidArgumentException('Database password not found in configuration file');
+        }
+        if (!empty($decoded->error_log)) {
+            $this->error_log = $decoded->error_log;
+        }else{
+          throw new \InvalidArgumentException('Database password not found in configuration file');
+        }
         $this->setNonceSalt(!empty($decoded->nonce_salt)?$decoded->nonce_salt:'');
         $this->setNonceIv(!empty($decoded->iv)?$decoded->iv:'');
     }
@@ -528,16 +551,6 @@ class Sqrl
     public function getDomain(): string
     {
         return $this->domain;
-    }
-
-    /**
-     * Gets the server friendly name clients display
-     *
-     * @return string
-     */
-    public function getFriendlyName(): string
-    {
-        return $this->friendly_name;
     }
 
     /**
@@ -645,18 +658,6 @@ class Sqrl
     public function setDomain(string $domain)
     {
         $this->domain = $domain;
-    }
-
-
-    /**
-     * Sets the friendly name clients should display
-     *
-     * @param string $friendly_name
-     *
-     */
-    public function setFriendlyName(string $friendly_name)
-    {
-        $this->friendly_name = $friendly_name;
     }
 
     /**
@@ -812,9 +813,6 @@ class Sqrl
     protected function setupLogger()
     {
 
-      // Logging directory config
-      // TODO: setup a log roll and compression in live site
-      define("ERROR_LOG", "log/error.log");
       // Set the logging level for logging to file
       // 0=none, 1=low, 2=medium, 3=verbose
       define("ERROR_LOG_LEVEL_FILE", 3);
@@ -822,17 +820,13 @@ class Sqrl
       // 0=none, 1=low, 2=medium, 3=verbose
       // SANDBOX_MODE will automatically set stdout errors to none
       define("ERROR_LOG_LEVEL_STDOUT", 0);
-      // Set error reporting according to config values; display `On` for sandbox mode
-      // otherwise display errors `Off`
-      $display_errors = "Off";
-      $display_startup_errors = "Off";
       // Apply config rules to error reporting; always set `on`
       error_reporting(-1); // -1 for reporting, 1 for none (Always set to -1)
-      ini_set('display_errors', $display_errors);
-      ini_set('display_startup_errors', $display_startup_errors);
+      ini_set('display_errors', "On");
+      ini_set('display_startup_errors', "On");
       // Set the error log file and turn on file-based error logging
       ini_set("log_errors", 1); // (Always set to `1` for logging)
-      ini_set("error_log", ERROR_LOG); // ERROR_LOG in the logging_config.php file defines where logs are stored.
+      ini_set("error_log", $this->error_log);
       // Define the default exception handler
       // this allows exceptions to be directed to log file and stdout
       //set_exception_handler($this->exceptionHandler());
@@ -1197,7 +1191,7 @@ class Sqrl
       }else{
 
         try{
-            $this->conn = new \PDO(DB_APPLICATION.':host='. DB_HOST .';dbname='. DB_NAME . ';charset=utf8', DB_USERNAME, DB_PASSWORD);
+            $this->conn = new \PDO($this->db_application.':host='. $this->db_host .';dbname='. $this->db_name . ';charset=utf8', $this->db_username, $this->db_password);
             $this->db_status = true;
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -1229,7 +1223,7 @@ class Sqrl
 
         }catch(PDOException $e){
 
-            trigger_error("SQRL storeIssuedNutRecord Failed: Database error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
+            trigger_error("SQRL storeIssuedNutRecord Failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
             trigger_error($e);
 
             return false;
@@ -1253,7 +1247,7 @@ class Sqrl
 
       }catch(PDOException $e){
 
-          trigger_error("SQRL clearExpiredNuts Failed: Database error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
+          trigger_error("SQRL clearExpiredNuts Failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
           trigger_error($e);
 
           return false;
@@ -1280,7 +1274,7 @@ class Sqrl
 
       }catch(PDOException $e){
 
-          trigger_error("SQRL deleteValidatedNut Failed: Database error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
+          trigger_error("SQRL deleteValidatedNut Failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
           trigger_error($e);
 
           return false;
@@ -1312,7 +1306,7 @@ class Sqrl
 
       }catch(PDOException $e){
 
-          trigger_error("Vanilla Pancakes Data Retrieve Failed: Database error to get uncollected badges".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
+          trigger_error("Sqrl getNutRecordToValidate failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
           trigger_error($e);
 
 

@@ -14,10 +14,10 @@ CREATE TABLE `sqrl_nuts` (
   `session_id` varchar(30) NOT NULL,
   `public_key` char(44) DEFAULT NULL,
   `verified` tinyint(4) NOT NULL DEFAULT '0',
-  `kill_session` tinyint(4) NOT NULL DEFAULT '0'
+  `kill_session` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nut` (`nut`)
-) ENGINE=InnoDB DEFAULT CHARSET=uft8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
@@ -34,4 +34,4 @@ CREATE TABLE `sqrl_status` (
   `nut_status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `public_key` (`public_key`)
-) ENGINE=InnoDB DEFAULT CHARSET=uft8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

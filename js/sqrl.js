@@ -5,9 +5,9 @@
 var syncQuery1 = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject('MSXML2.XMLHTTP.3.0');
 var syncQuery2 = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject('MSXML2.XMLHTTP.3.0');
 var mixedProbe = new Image();
-var gifProbe = new Image(); 					// create an instance of a memory-based probe image
+var gifProbe = new Image(); // create an instance of a memory-based probe image
 var localhostRoot = 'http://localhost:25519/';	// the SQRL client listening URL root
-var sqrlApiDomain = 'https://sqrl.grc.com';	// the location of the SQRL server
+var sqrlApiDomain = 'https://sqrl.ripplesoftware.ca';	// the location of the SQRL server
 var imageProbeUrl = 'http://www.rebindtest.com/open.gif';
 Date.now = Date.now || function() { return (+new Date()) };	// add old browser Date.now() support
 var sqrlNut, sqrlUrl, sqrlPng;

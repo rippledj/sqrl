@@ -1,15 +1,15 @@
 {
     "accepted_versions": [1],
     "secure":1,
-    "key_domain":"localhost",
+    "key_domain":"domain.com",
     "authentication_path":"/sqrlauth.php",
     "allow_anonymous_accounts":0,
 
     "db_application":"mysql",
     "db_host":"localhost",
     "db_name":"sqrl_login",
-    "db_username":"root",
-    "db_password":"XOjRD*P8ymp0^r!%zrHzkcR%NyXGFE^rbYDn8QMP2w3eR@6hwNEXU17gOI5i",
+    "db_username":"db_username",
+    "db_password":"db_password",
     "nonce_table":"sqrl_nuts",
     "pubkey_table":"sqrl_status",
 

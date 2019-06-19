@@ -263,3 +263,118 @@ Stack trace:
 #2 {main}
   thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
 [19-Jun-2019 18:52:34 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:06:16 UTC] PHP Notice:  SQRL Login Request -  in /Users/development/Sandbox/sqrl/sqrlauth.php on line 28
+[19-Jun-2019 19:06:17 UTC] PHP Notice:  <pre>Array
+(
+    [nut] => bbd61d4e001c1e6420290aa740b63f09458eddce1508005ce56563871b55dfeb
+    [x] => 5
+    [sfn] => UmlwcGxlIFNvZnR3YXJlIFJTUkMgVGVzdA
+)
+</pre> in /Users/development/Sandbox/sqrl/Sqrl/pretty_print.php on line 3
+[19-Jun-2019 19:06:17 UTC] PHP Notice:  <pre>Array
+(
+)
+</pre> in /Users/development/Sandbox/sqrl/Sqrl/pretty_print.php on line 4
+[19-Jun-2019 19:06:17 UTC] PHP Notice:  <pre>Array
+(
+    [EMAIL_SMTP_USERNAME] => elaan@elaan.com.tw
+    [EMAIL_SMTP_PASSWORD] => fs$rjrGK&wfO#Q2A7a1@UlFE$9UxTYrGlBOi%nXH@Gn&T$L@Pgv6exE#KJTfSm41
+    [RECAPTCHA_SITE_KEY] => 6LeuOhUUAAAAANY43tS-Gunf-8MbYsoE1pdUzvBJ
+    [RECAPTCHA_SECRET_KEY] => 6LeuOhUUAAAAAP5kfYuEG66uOrtQkXThyY-3igUd
+    [FACEBOOK_APP_ID] => 101433566868441
+    [FACEBOOK_SECRET_CODE] => 36b8b714f719cd5f736fc0ba2b921e98
+    [USER_DB_PASS] => 588j4ZmwdW3*j7n6QMdC!6HHSkshURkSTY3b&EqENJCt2fyYBF
+    [CONTENT_DB_PASS] => 9*ddP*5fZu4rv%6NdgKWuc7Su8%&bS!xVqKK7%pmVPf!2bKCa
+    [SYSTEM_DB_PASS] => 4twBa3jXfZv8kFY46xp*wUPuVZyfgw^WMYVjpADn*m*9Cf&4*Q
+    [ENV_ENC_KEY] => None
+    [ADV_ENC_KEY] => None
+    [HTTPS] => on
+    [SSL_TLS_SNI] => localhost
+    [SSL_SERVER_S_DN_C] => CA
+    [SSL_SERVER_S_DN_ST] => Ontario
+    [SSL_SERVER_S_DN_L] => New Liskeard
+    [SSL_SERVER_S_DN_O] => RippleSoftware
+    [SSL_SERVER_S_DN_CN] => localhost
+    [SSL_SERVER_I_DN_C] => CA
+    [SSL_SERVER_I_DN_ST] => Ontario
+    [SSL_SERVER_I_DN_L] => New Liskeard
+    [SSL_ in /Users/development/Sandbox/sqrl/Sqrl/pretty_print.php on line 5
+[19-Jun-2019 19:06:17 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$sqrlGenerator in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 1172
+[19-Jun-2019 19:06:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getNonce() on null in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:1172
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(1063): Sqrl\Sqrl->formatResponse(192)
+#1 /Users/development/Sandbox/sqrl/sqrlauth.php(35): Sqrl\Sqrl->getResponseMessage()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 1172
+[19-Jun-2019 19:06:42 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:18:23 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:18:49 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:18:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getStatelessLogin() in /Users/development/Sandbox/sqrl/index.php:32
+Stack trace:
+#0 {main}
+  thrown in /Users/development/Sandbox/sqrl/index.php on line 32
+[19-Jun-2019 19:19:03 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:19:03 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$statefull_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:19:04 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:558
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:19:48 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:19:48 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$statefull_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:19:48 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:558
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:19:50 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:19:50 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$statefull_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:19:50 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:558
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:20:41 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:20:41 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:20:41 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:558
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:22:07 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:22:07 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:22:07 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:558
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 558
+[19-Jun-2019 19:22:26 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:22:26 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 560
+[19-Jun-2019 19:22:26 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:560
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 560
+[19-Jun-2019 19:22:28 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:22:28 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 560
+[19-Jun-2019 19:22:28 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:560
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 560
+[19-Jun-2019 19:25:02 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:25:02 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 561
+[19-Jun-2019 19:25:02 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:561
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 561
+[19-Jun-2019 19:26:06 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:26:06 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 561
+[19-Jun-2019 19:26:06 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:561
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(32): Sqrl\Sqrl->getStatelessLogin()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 561
+[19-Jun-2019 19:28:32 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 19:30:34 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27

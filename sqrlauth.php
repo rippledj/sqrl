@@ -30,9 +30,11 @@ trigger_error("SQRL Login Request - ", E_USER_NOTICE);
 //TODO: write sanitize functions
 $sqrl->sanitizeClientRequest($_GET, $_POST, $_SERVER);
 require_once SQRL_PHP_DIRPATH."pretty_print.php";
+//analyze Sqrl client response
 $sqrl->parseRequest($_GET, $_POST, $_SERVER);
-//check validation
+//respond to validation request
 $response = $sqrl->getResponseMessage();
+echo $response;
 trigger_error("SQRL Login Authentication Request Response - ".$response, E_USER_NOTICE);
 
 ?>

@@ -461,6 +461,7 @@ class Sqrl
         $currentNuts[] = $newNut;
     }
 
+    //TODO: cleanup this config setting function
     public function loadConfigFromJSON(string $filePath): void
     {
         if (!file_exists($filePath)) {
@@ -482,6 +483,9 @@ class Sqrl
                 );
         if (!empty($decoded->nonce_max_age)) {
             $this->setNonceMaxAge($decoded->nonce_max_age);
+        }
+        if (!empty($decoded->secure) && (int)$decoded->secure > 0) {
+            $this->setStatelessLogin($decoded->stateless_login);
         }
         if (!empty($decoded->height)) {
             $this->setQrHeight($decoded->height);
@@ -541,6 +545,18 @@ class Sqrl
     public function getSecure(): bool
     {
         return $this->secure;
+    }
+
+    /**
+     * Gets whether server will issue nuts encrypted with
+     * stateless login values
+     *
+     * @param boolean $secure
+     *
+     */
+    public function getStatelessLogin(): bool
+    {
+        return $this->stateless_login;
     }
 
     /**
@@ -647,6 +663,18 @@ class Sqrl
     public function setSecure(bool $secure)
     {
         $this->secure = $secure;
+    }
+
+    /**
+     * Sets whether server will issue nuts encrypted with
+     * stateless login values
+     *
+     * @param boolean $secure
+     *
+     */
+    public function setStatelessLogin(bool $stateless_login)
+    {
+        $this->stateless_login = $stateless_login;
     }
 
     /**

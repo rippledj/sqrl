@@ -1340,7 +1340,7 @@ class Sqrl
     }
 
     //sanitize $_SERVER
-    protected function santizeServerData()
+    protected function sanitizeServerData()
     {
 
     }

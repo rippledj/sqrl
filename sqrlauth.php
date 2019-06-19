@@ -27,6 +27,9 @@ if (session_status() == PHP_SESSION_NONE) {
 $sqrl = new \Sqrl\Sqrl($config);
 trigger_error("SQRL Login Request - ", E_USER_NOTICE);
 
+//TODO: write sanitize functions
+$sqrl->sanitizeClientRequest($_GET, $_POST, $_SERVER);
+require_once SQRL_PHP_DIRPATH."pretty_print.php";
 $sqrl->parseRequest($_GET, $_POST, $_SERVER);
 //check validation
 $response = $sqrl->getResponseMessage();

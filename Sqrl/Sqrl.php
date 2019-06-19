@@ -332,7 +332,7 @@ class Sqrl
 
           $this->nut = substr(md5(uniqid('', true)), 0, 12);
           // Store the nut
-          if(!$this->storeIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
+          if(!$thisIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
             throw new SqrlException(DATABASE_EXCEPTION);
           }else{
 
@@ -765,7 +765,7 @@ class Sqrl
     {
         if (is_string($server)) {
             return $server === $this->generateUrl($this->config, $nut) &&
-                    $secure === $this->config->getSecure();
+                    $secure === $this->getSecure();
         } else {
             if (!isset($server['ver']) ||
                 !isset($server['nut']) ||
@@ -774,12 +774,12 @@ class Sqrl
             ) {
                 return false;
             }
-            $nutInfo = $this->store->getNutDetails($nut);
-            return $server['ver'] === implode(',', $this->config->getAcceptedVersions()) &&
+            $nutInfo = $this->getNutDetails($nut);
+            return $server['ver'] === implode(',', $this->getAcceptedVersions()) &&
                     $server['nut'] === $nut &&
                     (!is_array($nutInfo) || hexdec($server['tif']) === $nutInfo['tif']) &&
-                    $server['qry'] === $this->generateQry($this->config->getAuthenticationPath(), $nut) &&
-                    $secure === $this->config->getSecure();
+                    $server['qry'] === $this->generateQry($this->getAuthenticationPath(), $nut) &&
+                    $secure === $this->getSecure();
         }
     }
 
@@ -793,8 +793,8 @@ class Sqrl
      */
     public function validateNut(string $nut, string $signingKey = null): int
     {
-        $nutInfo = $this->store->getNutDetails($nut);
-        $maxAge = '-'.$this->config->getNonceMaxAge().' minutes';
+        $nutInfo = $this->getNutDetails($nut);
+        $maxAge = '-'.$this->getNonceMaxAge().' minutes';
         if (!is_array($nutInfo)) {
             return self::INVALID_NUT;
         } elseif ($nutInfo['createdDate']->format('U') < strtotime($maxAge)) {
@@ -914,11 +914,11 @@ class Sqrl
                 $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
                 return;
             }
-            if (!$this->validator->validateServer($serverInfo,$this->requestNut,isset($server['HTTPS'])?$server['HTTPS']:false)) {
+            if (!$this->validateServer($serverInfo,$this->requestNut,isset($server['HTTPS'])?$server['HTTPS']:false)) {
                 $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
                 return;
             }
-            $nutStatus = $this->validator->validateNut($this->requestNut,isset($clientInfo['idk'])?$clientInfo['idk']:null);
+            $nutStatus = $this->validateNut($this->requestNut,isset($clientInfo['idk'])?$clientInfo['idk']:null);
             if ($nutStatus !== \Sqrl\SqrlValidateInterface::VALID_NUT) {
                 if ($nutStatus === \Sqrl\SqrlValidateInterface::EXPIRED_NUT) {
                     $this->authenticationKey = $clientInfo['idk'];
@@ -930,7 +930,7 @@ class Sqrl
                 }
                 return;
             } else {
-                $this->tif|= $this->validator->nutIPMatches($get['nut'],$server['REMOTE_ADDR'])?self::IP_MATCH:0;
+                $this->tif|= $this->nutIPMatches($get['nut'],$server['REMOTE_ADDR'])?self::IP_MATCH:0;
             }
             if (!$this->validateSignatures($post, $clientInfo)) {
                 $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
@@ -954,7 +954,7 @@ class Sqrl
 
     private function validateSignatures($post,$clientInfo)
     {
-        if (!$this->validator->validateSignature(
+        if (!$this->validateSignature(
                 $post['client'].$post['server'],
                 $clientInfo['idk'],
                 $this->base64URLDecode($post['ids'])
@@ -970,7 +970,7 @@ class Sqrl
         }
         if (isset($post['urs']) && isset($clientInfo['vuk']) && isset($clientInfo['pidk']) && !$this->validator->validateSignature(
                 $post['client'].$post['server'],
-                $this->store->getIdentityVUK($clientInfo['pidk']),
+                $this->getIdentityVUK($clientInfo['pidk']),
                 $this->base64URLDecode($post['urs'])
                 )) {
             return false;
@@ -1065,15 +1065,15 @@ class Sqrl
 
     protected function query()
     {
-        $identityStatus = $this->store->checkIdentityKey($this->authenticationKey);
+        $identityStatus = $this->checkIdentityKey($this->authenticationKey);
         if ($identityStatus === SqrlStoreInterface::IDENTITY_ACTIVE) {
             $this->tif|= self::ID_MATCH;
         } elseif (!empty($this->previousIdKey)) {
-            if ($this->store->checkIdentityKey($this->previousIdKey) === SqrlStoreInterface::IDENTITY_ACTIVE) {
+            if ($this->checkIdentityKey($this->previousIdKey) === SqrlStoreInterface::IDENTITY_ACTIVE) {
                 $this->tif|= self::PREVIOUS_ID_MATCH;
             }
         } elseif ($identityStatus === SqrlStoreInterface::IDENTITY_UNKNOWN) {
-            if (!$this->config->getAnonAllowed()) {//notify the client that anonymous authentication is not allowed in this transaction
+            if (!$this->getAnonAllowed()) {//notify the client that anonymous authentication is not allowed in this transaction
                 $this->tif|= self::FUNCTION_NOT_SUPPORTED|self::COMMAND_FAILED;
             }
         } elseif ($identityStatus === SqrlStoreInterface::IDENTITY_LOCKED) {
@@ -1083,18 +1083,18 @@ class Sqrl
 
     protected function ident()
     {
-        $identityStatus = $this->store->checkIdentityKey($this->authenticationKey);
+        $identityStatus = $this->checkIdentityKey($this->authenticationKey);
         if ($identityStatus === SqrlStoreInterface::IDENTITY_ACTIVE) {
-            $this->store->logSessionIn($this->requestNut);
+            $this->logSessionIn($this->requestNut);
             $this->tif|= self::ID_MATCH;
         } elseif ($identityStatus === SqrlStoreInterface::IDENTITY_UNKNOWN) {
             $this->identUnknownIdentity();
         } elseif ($identityStatus === SqrlStoreInterface::IDENTITY_LOCKED) {
-            if (empty($this->clientSUK) || $this->clientVUK !== $this->store->getIdentityVUK($this->authenticationKey)) {
+            if (empty($this->clientSUK) || $this->clientVUK !== $this->getIdentityVUK($this->authenticationKey)) {
                 $this->tif|= (self::CLIENT_FAILURE|self::COMMAND_FAILED);
             } else {
-                $this->store->unlockIdentityKey($this->authenticationKey);
-                $this->store->logSessionIn($this->requestNut);
+                $this->unlockIdentityKey($this->authenticationKey);
+                $this->logSessionIn($this->requestNut);
                 $this->tif|= self::ID_MATCH;
             }
         }
@@ -1103,33 +1103,33 @@ class Sqrl
     private function identUnknownIdentity()
     {
         if (!empty($this->previousIdKey) &&
-                $this->store->checkIdentityKey($this->previousIdKey) !== SqrlStoreInterface::IDENTITY_UNKNOWN) {
+                $this->checkIdentityKey($this->previousIdKey) !== SqrlStoreInterface::IDENTITY_UNKNOWN) {
             if (empty($this->clientSUK) || empty($this->clientVUK)) {
                 $this->tif|= (self::CLIENT_FAILURE|self::COMMAND_FAILED);
             } else {
-                $this->store->updateIdentityKey($this->previousIdKey,$this->authenticationKey,$this->clientSUK,$this->clientVUK);
-                $this->store->logSessionIn($this->requestNut);
+                $this->updateIdentityKey($this->previousIdKey,$this->authenticationKey,$this->clientSUK,$this->clientVUK);
+                $this->logSessionIn($this->requestNut);
                 $this->tif|= self::ID_MATCH|self::PREVIOUS_ID_MATCH;
             }
             return;
         }
-        if (!$this->config->getAnonAllowed()) {//notify the client that anonymous authentication is not allowed in this transaction
+        if (!$this->getAnonAllowed()) {//notify the client that anonymous authentication is not allowed in this transaction
             $this->tif|= (self::FUNCTION_NOT_SUPPORTED|self::COMMAND_FAILED);
         } elseif (empty($this->clientSUK)) {
             $this->tif|= (self::CLIENT_FAILURE|self::COMMAND_FAILED);
         } else {
-            $this->store->createIdentity($this->authenticationKey,$this->clientSUK,$this->clientVUK);
-            $this->store->logSessionIn($this->requestNut);
+            $this->createIdentity($this->authenticationKey,$this->clientSUK,$this->clientVUK);
+            $this->logSessionIn($this->requestNut);
             $this->tif|= self::ID_MATCH;
         }
     }
 
     protected function lock()
     {
-        $identityStatus = $this->store->checkIdentityKey($this->authenticationKey);
+        $identityStatus = $this->checkIdentityKey($this->authenticationKey);
         if ($identityStatus !== SqrlStoreInterface::IDENTITY_UNKNOWN) {
-            $this->store->lockIdentityKey($this->authenticationKey);
-            $this->store->endSession($this->requestNut);
+            $this->lockIdentityKey($this->authenticationKey);
+            $this->endSession($this->requestNut);
             $this->tif|= (self::ID_MATCH|self::SQRL_DISABLED);
         } else {
             $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
@@ -1162,13 +1162,13 @@ class Sqrl
     /**
      * Formats a response to send back to a client
      *
-     * @param int $code The TIF code to send back to the user
+     * @param int $code The TIF code to send back to the client
      *
      * @return string
      */
     protected function formatResponse($code)
     {
-        $resp = 'ver='.implode(',',$this->config->getAcceptedVersions())."\r\n"
+        $resp = 'ver='.implode(',',$this->getAcceptedVersions())."\r\n"
                 ."nut=".$this->sqrlGenerator->getNonce($code, $this->authenticationKey, $this->requestNut)."\r\n"
                 .'tif='.  strtoupper(dechex($code))."\r\n"
                 ."qry=".$this->sqrlGenerator->generateQry();
@@ -1176,9 +1176,9 @@ class Sqrl
             $resp.= "\r\nask=".$this->ask;
         }
         if (($this->tif&self::SQRL_DISABLED && !in_array('lock', $this->actions))) {
-            $resp.= "\r\nsuk=".$this->base64UrlEncode($this->store->getIdentitySUK($this->authenticationKey));
+            $resp.= "\r\nsuk=".$this->base64UrlEncode($this->getIdentitySUK($this->authenticationKey));
         } elseif ($this->tif&self::PREVIOUS_ID_MATCH && !in_array('ident', $this->actions)) {
-            $resp.= "\r\nsuk=".$this->base64UrlEncode($this->store->getIdentitySUK($this->previousIdKey));
+            $resp.= "\r\nsuk=".$this->base64UrlEncode($this->getIdentitySUK($this->previousIdKey));
         }
         return $this->base64UrlEncode($resp);
     }
@@ -1315,6 +1315,32 @@ class Sqrl
     }
 
     public function storeValidatedStatus($nut): bool
+    {
+
+    }
+
+    //santize the incoming request from an Sqrl client
+    public function sanitizeClientRequest($_GET, $_POST, $_SERVER)
+    {
+      $this->santizeGetData($_GET);
+      $this->sanitizePostData($_POST);
+      $this->sanitizeServerData($_SERVER);
+    }
+
+    //sanitize $_GET
+    protected function santizeGetData($_GET)
+    {
+
+    }
+
+    //santize $_POST
+    protected function sanitizePostData($_POST)
+    {
+
+    }
+
+    //sanitize $_SERVER
+    protected function santizeServerData($_SERVER)
     {
 
     }

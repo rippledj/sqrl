@@ -240,3 +240,26 @@ Stack trace:
   thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 516
 [18-Jun-2019 03:01:10 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
 [18-Jun-2019 04:05:53 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 18:51:30 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 18:51:30 UTC] PHP Notice:  Undefined variable: thisIssuedNutRecord in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[19-Jun-2019 18:51:30 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(308): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[19-Jun-2019 18:51:54 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 18:51:54 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Sqrl\Sqrl::IssuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(308): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[19-Jun-2019 18:52:19 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 18:52:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method Sqrl\Sqrl::issuedNutRecord() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:335
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(308): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 335
+[19-Jun-2019 18:52:34 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27

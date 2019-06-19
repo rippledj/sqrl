@@ -332,7 +332,7 @@ class Sqrl
 
           $this->nut = substr(md5(uniqid('', true)), 0, 12);
           // Store the nut
-          if(!$thisIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
+          if(!$this->storeIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
             throw new SqrlException(DATABASE_EXCEPTION);
           }else{
 
@@ -1320,27 +1320,27 @@ class Sqrl
     }
 
     //santize the incoming request from an Sqrl client
-    public function sanitizeClientRequest($_GET, $_POST, $_SERVER)
+    public function sanitizeClientRequest()
     {
-      $this->santizeGetData($_GET);
-      $this->sanitizePostData($_POST);
-      $this->sanitizeServerData($_SERVER);
+      $this->santizeGetData();
+      $this->sanitizePostData();
+      $this->sanitizeServerData();
     }
 
     //sanitize $_GET
-    protected function santizeGetData($_GET)
+    protected function santizeGetData()
     {
 
     }
 
     //santize $_POST
-    protected function sanitizePostData($_POST)
+    protected function sanitizePostData()
     {
 
     }
 
     //sanitize $_SERVER
-    protected function santizeServerData($_SERVER)
+    protected function santizeServerData()
     {
 
     }

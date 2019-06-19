@@ -8,8 +8,8 @@
     "db_application":"mysql",
     "db_host":"localhost",
     "db_name":"sqrl_login",
-    "db_username":"db_username",
-    "db_password":"db_password",
+    "db_username":"root",
+    "db_password":"5vsU9ndSgEd6skW5sTe",
     "nonce_table":"sqrl_nuts",
     "pubkey_table":"sqrl_status",
 

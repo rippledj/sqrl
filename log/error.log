@@ -378,3 +378,57 @@ Stack trace:
   thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 561
 [19-Jun-2019 19:28:32 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
 [19-Jun-2019 19:30:34 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 20:20:43 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:08:12 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:08:12 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:1355
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(1355): PDOStatement->execute()
+#1 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(374): Sqrl\Sqrl->storeIssuedNutRecord('64e49ed5016e', '64e49ed5016e', '::1', '5h01ht6p0a3fc43...')
+#2 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(332): Sqrl\Sqrl->generateNut()
+#3 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#4 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 1355
+[19-Jun-2019 22:08:42 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:18:20 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:18:20 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$use_memcache in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 644
+[19-Jun-2019 22:18:20 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getUseMemCache() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:644
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(380): Sqrl\Sqrl->getUseMemCache()
+#1 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(332): Sqrl\Sqrl->generateNut()
+#2 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#3 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 644
+[19-Jun-2019 22:21:58 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:21:58 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$stateless_login in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 632
+[19-Jun-2019 22:21:58 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getStatelessLogin() must be of the type bool, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:632
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(360): Sqrl\Sqrl->getStatelessLogin()
+#1 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(332): Sqrl\Sqrl->generateNut()
+#2 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#3 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 632
+[19-Jun-2019 22:24:06 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:24:06 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$nut in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 389
+[19-Jun-2019 22:24:06 UTC] PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Sqrl\Sqrl::generateUrl() must be of the type string, null given, called in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 332 and defined in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:420
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(332): Sqrl\Sqrl->generateUrl(NULL)
+#1 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 420
+[19-Jun-2019 22:25:35 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:25:35 UTC] PHP Notice:  Undefined property: Sqrl\Sqrl::$nut in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 447
+[19-Jun-2019 22:25:35 UTC] PHP Fatal error:  Uncaught TypeError: Return value of Sqrl\Sqrl::getNut() must be of the type string, null returned in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:447
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/index.php(31): Sqrl\Sqrl->getNut()
+#1 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 447
+[19-Jun-2019 22:29:53 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:30:30 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:33:51 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27
+[19-Jun-2019 22:33:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function Sqrl\generateStatelessNut() in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php:364
+Stack trace:
+#0 /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php(332): Sqrl\Sqrl->generateNut()
+#1 /Users/development/Sandbox/sqrl/index.php(29): Sqrl\Sqrl->getUrl()
+#2 {main}
+  thrown in /Users/development/Sandbox/sqrl/Sqrl/Sqrl.php on line 364
+[19-Jun-2019 22:34:41 UTC] PHP Notice:  SQRL Login Nut Generation -  in /Users/development/Sandbox/sqrl/index.php on line 27

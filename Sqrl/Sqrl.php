@@ -294,6 +294,30 @@ class Sqrl
     protected $requestNut = '';
     protected $previousIdKey = '';
 
+    /**
+     * The status code for valid nut
+     * @const
+     * @var int
+    */
+    const VALID_NUT = 0;
+    /**
+     * The status code for expired nut
+     * @const
+     * @var int
+    */
+    const EXPIRED_NUT = 1;
+    /**
+     * The status code for unissued/invalid nut
+     * @const
+     * @var int
+    */
+    const INVALID_NUT = 2;
+    /**
+     * The status code for key mismatch
+     * @const
+     * @var int
+    */
+    const KEY_MISMATCH = 3;
 
     public function __construct(string $config)
     {
@@ -326,20 +350,66 @@ class Sqrl
      * to strengthen (or weaken) the randomness of the generation.
      *
      * @return string
-     */
-     protected function generateNut()
-     {
+    */
+    protected function generateNut()
+    {
 
-          $this->nut = substr(md5(uniqid('', true)), 0, 12);
+        // TODO: replace this code with cryptographically secure rand seed
+        $this->nut = substr(md5(uniqid('', true)), 0, 12);
+
+        //TODO: Generate a nut with encrypted state data
+        if ( $this->getStatelessLogin() ) {
+
+            $this->orig_nut = $this->nut;
+            $this->nut = $this->generateStatelessNut($this->nut);
+            // Store the nut
+            if( $this->getUseMemCache() ){
+
+              //TODO: create ability to store into memory
+              // instead of database
+
+            } else {
+
+                $this->storeIssuedNutRecord((string) $this->nut, (string) $this->orig_nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id());
+                return $this->nut;
+
+            }
+
+        } else {
+
           // Store the nut
-          if(!$this->storeIssuedNutRecord((string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id())){
-            throw new SqrlException(DATABASE_EXCEPTION);
-          }else{
+          if( $this->getUseMemCache() ){
 
-            return $this->nut;
+            //TODO: create ability to store into memory
+            // instead of database
+
+          } else {
+
+              $this->storeIssuedNutRecord((string) $this->nut, (string) $this->nut, (string) $_SERVER['REMOTE_ADDR'], (string) session_id());
+              return $this->nut;
+
           }
 
-     }
+        }
+
+    }
+
+    /**
+     * Acccets a nut and encrypts stateless data into the nut
+     * and return the nut
+     *
+     * @return string
+    */
+    protected function generateStatelessNut($orig_nut)
+    {
+      //TODO: find function which was performing this action
+      // in the original Trianglman package
+
+      return substr(md5($orig_nut), 0, 12);;
+
+    }
+
+
 
     /**
      * Generates the URL for client responses
@@ -475,6 +545,8 @@ class Sqrl
         if (is_array($decoded->accepted_versions)) {
             $this->setAcceptedVersions($decoded->accepted_versions);
         }
+        $this->setStatelessLogin(!empty($decoded->stateless_login) && (int)$decoded->stateless_login > 0);
+        $this->setUseMemCache(!empty($decoded->use_memcache) && (int) $decoded->use_memcache > 0);
         $this->setSecure(!empty($decoded->secure) && (int)$decoded->secure > 0);
         $this->setDomain($decoded->key_domain ?? '');
         $this->setAuthenticationPath($decoded->authentication_path ?? '');
@@ -483,9 +555,6 @@ class Sqrl
                 );
         if (!empty($decoded->nonce_max_age)) {
             $this->setNonceMaxAge($decoded->nonce_max_age);
-        }
-        if (!empty($decoded->secure) && (int)$decoded->secure > 0) {
-            $this->setStatelessLogin($decoded->stateless_login);
         }
         if (!empty($decoded->height)) {
             $this->setQrHeight($decoded->height);
@@ -557,6 +626,18 @@ class Sqrl
     public function getStatelessLogin(): bool
     {
         return $this->stateless_login;
+    }
+
+    /**
+     * Gets whether server will use memcache for stateless
+     * login or alternatively use database
+     *
+     * @param boolean $use_memcache
+     *
+     */
+    public function getUseMemCache(): bool
+    {
+        return $this->use_memcache;
     }
 
     /**
@@ -669,12 +750,24 @@ class Sqrl
      * Sets whether server will issue nuts encrypted with
      * stateless login values
      *
-     * @param boolean $secure
+     * @param boolean $stateless_login
      *
      */
     public function setStatelessLogin(bool $stateless_login)
     {
         $this->stateless_login = $stateless_login;
+    }
+
+    /**
+     * Sets whether server use memcache as stateless authentication
+     * method or alternatively use the database
+     *
+     * @param boolean $use_memcache
+     *
+     */
+    public function setUseMemCache(bool $use_memcache)
+    {
+        $this->use_memcache = $use_memcache;
     }
 
     /**
@@ -789,11 +882,14 @@ class Sqrl
      *
      * @return boolean
      */
-    public function validateServer($server, string $nut, bool $secure): bool
+    public function validatePostServer($server, string $nut, bool $secure): bool
     {
         if (is_string($server)) {
-            return $server === $this->generateUrl($this->config, $nut) &&
-                    $secure === $this->getSecure();
+
+              return $server === $this->generateUrl($nut) &&
+                      $this->getSecureMatch($server);
+
+        //TODO: Check that this syntax is still in use
         } else {
             if (!isset($server['ver']) ||
                 !isset($server['nut']) ||
@@ -835,6 +931,22 @@ class Sqrl
         } else {
             return self::VALID_NUT;
         }
+    }
+
+    //get if the client returned url matches the configuration
+    //state for strict https checking
+    protected function getSecureMatch(string $url): bool
+    {
+        if ( $this->getSecure()) {
+
+          return substr($url,0,4) == "sqrl";
+
+        } else {
+
+          return substr($url,0,3) == "qrl";
+
+        }
+
     }
 
     //Setup the logger
@@ -935,23 +1047,24 @@ class Sqrl
     {
         //check that all the right pieces exist
         if (isset($post['client']) && isset($post['server']) && isset($post['ids']) && isset($get['nut'])) {
-            $serverInfo = $this->parseServer($post['server']);
-            $clientInfo = $this->parseClient($post['client']);
+            $serverInfo = $this->parsePostServer($post['server']);
+            $clientInfo = $this->parsePostClient($post['client']);
             $this->requestNut = $get['nut'];
             if (empty($serverInfo) || empty($clientInfo) || !isset($clientInfo['ver'])) {
                 $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
                 return;
             }
-            if (!$this->validateServer($serverInfo,$this->requestNut,isset($server['HTTPS'])?$server['HTTPS']:false)) {
+            //TODO: validate that $post['server'] can be what?? in the client
+            elseif (!$this->validatePostServer($serverInfo,$this->requestNut,isset($server['HTTPS'])?$server['HTTPS']:false)) {
                 $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
                 return;
             }
             $nutStatus = $this->validateNut($this->requestNut,isset($clientInfo['idk'])?$clientInfo['idk']:null);
-            if ($nutStatus !== \Sqrl\SqrlValidateInterface::VALID_NUT) {
-                if ($nutStatus === \Sqrl\SqrlValidateInterface::EXPIRED_NUT) {
+            if ($nutStatus !== true) {
+                if ($nutStatus === self::EXPIRED_NUT) {
                     $this->authenticationKey = $clientInfo['idk'];
                     $this->tif|= (self::COMMAND_FAILED|self::TRANSIENT_ERROR);
-                } elseif ($nutStatus === SqrlValidateInterface::KEY_MISMATCH) {
+                } elseif ($nutStatus === self::KEY_MISMATCH) {
                     $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE|self::BAD_ID_ASSOCIATION);
                 } else {
                     $this->tif|= (self::COMMAND_FAILED|self::CLIENT_FAILURE);
@@ -1018,7 +1131,7 @@ class Sqrl
      * @param string $clientInput
      * @return void
      */
-    protected function parseClient($clientInput)
+    protected function parsePostClient($clientInput)
     {
         $inputAsArray = explode("\n", $this->base64URLDecode($clientInput));
         $return = array();
@@ -1055,9 +1168,10 @@ class Sqrl
         return $return;
     }
 
-    protected function parseServer($serverData)
+    protected function parsePostServer($serverData)
     {
         $decoded = $this->base64URLDecode($serverData);
+        trigger_error("Decoded Post Server: ".$decoded, E_USER_NOTICE);
         if (substr($decoded,0,7)==='sqrl://' || substr($decoded,0,6)==='qrl://'){
             return $decoded;
         } else {
@@ -1232,17 +1346,18 @@ class Sqrl
     }
 
     //stores a sqrl set of login data (nut, )
-    public function storeIssuedNutRecord(string $nut, string $ip, string $session_id): bool
+    public function storeIssuedNutRecord(string $nut, string $orig_nut, string $ip, string $session_id): bool
     {
 
         try{
 
             $query = $this->conn->prepare('
             INSERT INTO sqrl_login.`sqrl_nuts`
-            (nut, ip, session_id)
-            VALUES(:nut, :ip, :session_id)
+            (nut, orig_nut, ip, session_id)
+            VALUES(:nut, :orig_nut, :ip, :session_id)
             ');
             $query->bindValue(':nut', $nut, PDO::PARAM_STR);
+            $query->bindValue(':orig_nut', $orig_nut, PDO::PARAM_STR);
             $query->bindValue(':ip', $ip, PDO::PARAM_STR);
             $query->bindValue(':session_id', $session_id, PDO::PARAM_STR);
             $query->execute();
@@ -1318,23 +1433,37 @@ class Sqrl
 
     }
 
-    public function getNutRecordToValidate($nut): array
+    // Get the nut details from the database
+    public function getNutDetails($nut): array
     {
 
       try{
 
           $query = $this->conn->prepare('
-          SELECT nut, create, ip
+          SELECT nut, orig_nut, created, ip, public_key, session_id
           FROM  sqrl_login.`sqrl_nuts`
           WHERE nut=:nut
           AND verified = 0
           ');
-          $query->bindValue(':nut', $nut, PDO::PARAM_STR);
+          $query->bindValue(':nut', $nut, \PDO::PARAM_STR);
           $query->execute();
+          $result = $query->fetch(\PDO::FETCH_ASSOC);
+          if (empty($result)) {
+              return null;
+          } else {
+              return array (
+                  'originalKey'=> $result['public_key'],
+                  'nut'=> $result['nut'],
+                  'sessionId'=> $result['session_id'],
+                  'originalNut'=> $result['orig_nut'],
+                  'createdDate'=> new \DateTime($result['created']),
+                  'nutIP'=> long2ip($result['ip'])
+              );
+          }
 
       }catch(PDOException $e){
 
-          trigger_error("Sqrl getNutRecordToValidate failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
+          trigger_error("Sqrl getNutDetails failed: Database Error - ".$query->errorInfo()[0]." ".$query->errorInfo()[1]." ".$query->errorInfo()[2], E_USER_WARNING);
           trigger_error($e);
 
 

@@ -34,7 +34,6 @@ require_once SQRL_PHP_DIRPATH."pretty_print.php";
 $sqrl->parseRequest($_GET, $_POST, $_SERVER);
 //respond to validation request
 $response = $sqrl->getResponseMessage();
-echo $response;
 trigger_error("SQRL Login Authentication Request Response - ".$response, E_USER_NOTICE);
 
 ?>

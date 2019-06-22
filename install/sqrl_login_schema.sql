@@ -9,6 +9,7 @@ USE `sqrl_login`;
 CREATE TABLE `sqrl_nuts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nut` char(64) NOT NULL,
+  `orig_nut` char(64) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip` int(10) unsigned NOT NULL,
   `session_id` varchar(30) NOT NULL,

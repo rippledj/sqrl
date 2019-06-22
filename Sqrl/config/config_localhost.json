@@ -4,7 +4,9 @@
     "key_domain":"localhost",
     "authentication_path":"/sqrlauth.php",
     "allow_anonymous_accounts":0,
-    "stateless_login":0,
+    "statefull_nut":0,
+    "stateless_login":1,
+    "use_memcache":0,
 
     "db_application":"mysql",
     "db_host":"localhost",
